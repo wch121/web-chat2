@@ -1,147 +1,168 @@
-// import React, { useEffect, useState } from "react";
-// import { Breadcrumb, Layout, Menu } from 'antd';
-// import SubMenu from "antd/lib/menu/SubMenu";
-// import { ReadOutlined, UserOutlined, EditOutlined, SelectOutlined } from '@ant-design/icons';
-// import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
-// import MyHeader from "components/MyHeader";
+import "App.less";
+import React, { useEffect, useState } from "react";
+import { Dropdown, Layout, Breadcrumb, Menu } from "antd";
+import { EditOutlined, TeamOutlined, AccountBookOutlined, ReadOutlined, SelectOutlined, DownOutlined } from "@ant-design/icons";
+// import { useNavigate } from "react-router-dom";
+// import logo from "assets/images/logo.png";
+
+
+
+const { Header, Footer, Sider, Content } = Layout;
+const { SubMenu } = Menu;
+
+const App = () => {
+    const [username, setUsername] = useState("匿名用户");
+    const menu = (
+        <Menu>
+            <Menu.Item key="n">退出登录</Menu.Item>
+        </Menu>
+    );
+
+    return (
+        <Layout>
+            <Header className="header">
+                <div className="right">
+                    <Dropdown overlay={menu}>
+                        <a className="ant-dropdow-link" href="!#" onClick={(e) => e.preventDefault()}>
+                            <img src={"../assets/images/defaultAvatar.jpg"} className="avatar" alt="" />
+                            <span >{username}</span>
+                            <DownOutlined />
+                        </a>
+                    </Dropdown>
+                </div>
+            </Header>
+            <Layout>
+                <Sider
+                    theme="dark"
+                    style={{
+                        overflow: "auto",
+                        height: "100vh",
+                        position: "fixed",
+                        left: 0,
+                    }}
+                >
+                    <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
+                        <SubMenu key="sub1" icon={<TeamOutlined />} title="小编">
+                            <Menu.Item key="1" icon={<EditOutlined />}>
+                                文章编辑
+                            </Menu.Item>
+                            <Menu.Item key="2" icon={<ReadOutlined />}>
+                                查看文章列表
+                            </Menu.Item>
+                        </SubMenu>
+                        <SubMenu key="sub2" icon={<TeamOutlined />} title="管理员">
+                            <Menu.Item key="3" icon={<EditOutlined />}>
+                                文章编辑
+                            </Menu.Item>
+                            <Menu.Item key="4" icon={<ReadOutlined />}>
+                                查看文章列表
+                            </Menu.Item>
+                            <Menu.Item key="5" icon={<SelectOutlined />}>
+                                小编名单
+                            </Menu.Item>
+                        </SubMenu>
+                        <SubMenu key="sub3" icon={<AccountBookOutlined />} title="超级管理员">
+                            <Menu.Item key="6" icon={<EditOutlined />}>
+                                文章编辑
+                            </Menu.Item>
+                            <Menu.Item key="7" icon={<ReadOutlined />}>
+                                查看文章列表
+                            </Menu.Item>
+                            <Menu.Item key="8" icon={<SelectOutlined />}>
+                                小编名单
+                            </Menu.Item>
+                            <Menu.Item key="9" icon={<TeamOutlined />}>
+                                管理员名单
+                            </Menu.Item>
+                        </SubMenu>
+                    </Menu>
+                </Sider>
+                <Content className="content">
+                    <Breadcrumb style={{ margin: "16px 0" }}>
+                        <Breadcrumb.Item>首页</Breadcrumb.Item>
+                        <Breadcrumb.Item>文章编辑</Breadcrumb.Item>
+                    </Breadcrumb>
+                    <section className="content_main">
+                        {/* 在此处渲染页面内容 */}
+                    </section>
+                </Content>
+            </Layout>
+            <Footer className="footer">Respect | Copyright © 2022 Author wch</Footer>
+        </Layout>
+    );
+};
+
+export default App;
+
 // import "App.less";
-// // import { Dispatch} from "react";
-// import { connect } from "react-redux";
+// import React, { useState } from 'react';
+// import {
+//     DesktopOutlined,
+//     FileOutlined,
+//     PieChartOutlined,
+//     TeamOutlined,
+//     UserOutlined,
+// } from '@ant-design/icons';
+// import type { MenuProps } from 'antd';
+// import { Breadcrumb, Layout, Menu, theme } from 'antd';
+// const { Header, Content, Footer, Sider } = Layout;
 
-// let arr: number[] = [];
-// for (var i = 0; i < 80; i++) {
-//     arr.push(i)
+
+// type MenuItem = Required<MenuProps>['items'][number];
+
+// function getItem(
+//     label: React.ReactNode,
+//     key: React.Key,
+//     icon?: React.ReactNode,
+//     children?: MenuItem[],
+// ): MenuItem {
+//     return {
+//         key,
+//         icon,
+//         children,
+//         label,
+//     } as MenuItem;
 // }
 
-// const { Content, Sider } = Layout;
+// const items: MenuItem[] = [
+//     getItem('Option 1', '1', <PieChartOutlined />),
+//     getItem('Option 2', '2', <DesktopOutlined />),
+//     getItem('User', 'sub1', <UserOutlined />, [
+//         getItem('Tom', '3'),
+//         getItem('Bill', '4'),
+//         getItem('Alex', '5'),
+//     ]),
+//     getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
+//     getItem('Files', '9', <FileOutlined />),
+// ];
 
-// interface Iprops {
-//     key1: number;
-//     changeKeyFn: () => void;
-// }
-
-// function App(props: Iprops) {
-//     //定义侧边栏当前项的值
-//     const [asideKey, setAsideKey] = useState("0");
-//     const [bread, setBread] = useState("");
-//     const location = useLocation();
-//     const navigate = useNavigate();
-
-//     //监听路由的变化，从而修改侧边栏当前值
-//     useEffect(() => {
-//         if (location.pathname === '/') {
-//             //根路径重定向到/list
-//             navigate('/list')
-//         }
-//         switch (location.pathname) {
-//             case "/list":
-//                 setAsideKey("1");
-//                 setBread("查看文章列表")
-//                 break;
-//             case "/edit":
-//                 setAsideKey("2");
-//                 setBread("文章编辑")
-//                 break;
-//             case "/means":
-//                 setAsideKey("3");
-//                 setBread("修改资料")
-//                 break;
-//             case "/namelist":
-//                 setAsideKey("4-1");
-//                 setBread("小编名单")
-//                 break;
-//             default:
-//                 setAsideKey("0");
-//                 setBread("")
-//                 break;
-//         }
-//         //只要路径中有、edit的字符串，就让文章编辑呈现当前项
-//         if (location.pathname.includes('/edit')) {
-//             setAsideKey("2");
-//             setBread("文章编辑")
-//         }
-//     }, [location.pathname])
+// const App = () => {
+//     const [collapsed, setCollapsed] = useState(false);
+//     const {
+//         token: { colorBgContainer },
+//     } = theme.useToken();
 
 //     return (
-//         <Layout className="container">
-//             <MyHeader key={props.key1} />
-//             <Layout className="container_content">
-//                 <Sider width={200} >
-//                     <Menu
-//                         mode="inline"
-//                         theme="dark"
-//                         selectedKeys={[asideKey]}
-//                         defaultOpenKeys={['4']}
-//                         style={{ height: '200%', borderRight: 0 }}
-//                     >
-//                         <Menu.Item key="1">
-//                             <Link to={'/list'}><ReadOutlined />查看文章列表</Link>
-//                         </Menu.Item>
-//                         <Menu.Item key="2">
-//                             <Link to={'/edit'}><EditOutlined />文章编辑</Link>
-//                         </Menu.Item>
-//                         <Menu.Item key="3">
-//                             <Link to={'/means'}><ReadOutlined />修改资料</Link>
-//                         </Menu.Item>
-//                         <SubMenu
-//                             key="4"
-//                             icon={<UserOutlined />}
-//                             title="管理员"
-//                             style={{ display: localStorage.getItem('player') === 'vip' ? 'block' : 'none' }}
-//                         >
-//                             <Menu.Item key="4-1">
-//                                 <Link to={'/namelist'}><SelectOutlined />小编名单</Link>
-//                             </Menu.Item>
-//                         </SubMenu>
-
-//                     </Menu>
-//                 </Sider>
-//                 <Layout style={{ padding: '0 24px 24px' }}>
+//         <Layout style={{ minHeight: '100vh' }}>
+//             <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
+//                 <div style={{ height: 32, margin: 16, background: 'rgba(255, 255, 255, 0.2)' }} />
+//                 <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
+//             </Sider>
+//             <Layout className="site-layout">
+//                 {/* <Header style={{ padding: 0, background: colorBgContainer }} /> */}
+//                 <Content style={{ margin: '0 16px' }}>
 //                     <Breadcrumb style={{ margin: '16px 0' }}>
-//                         <Breadcrumb.Item><Link to={'/'}>首页</Link></Breadcrumb.Item>
-//                         <Breadcrumb.Item>{bread}</Breadcrumb.Item>
+//                         <Breadcrumb.Item>User</Breadcrumb.Item>
+//                         <Breadcrumb.Item>Bill</Breadcrumb.Item>
 //                     </Breadcrumb>
-//                     <Content className="mycontent">
-//                         <Outlet />
-//                     </Content>
-//                 </Layout>
-//             </Layout >
-//             <footer style={{
-//                 textAlign: 'center',
-//                 color: '#fff',
-//                 height: '70px',
-//                 lineHeight: '70px',
-//                 background: '#001529'
-//             }}>Respect | Copyright © 2022 Author wch</footer>
-//         </Layout >
+//                     <div style={{ padding: 24, minHeight: 360, background: colorBgContainer }}>
+//                         Bill is a cat.
+//                     </div>
+//                 </Content>
+//                 <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+//             </Layout>
+//         </Layout>
 //     );
 // };
 
-// //state的映射
-// const mapStateToProps = (state: { key: number }) => {
-//     return {
-//         key1: state.key
-//     }
-// }
-
-// //dispatch的映射
-// // const mapDispatchToProps = (dispatch: Dispatch<any>) => {
-// //     return {
-// //         changeKeyFn() {
-// //             dispatch({ type: "changeKey" })
-// //         }
-// //     }
-// // }
-
-// export default connect(mapStateToProps)(App)
-
-import React, { FC } from "react";
-import { Button } from 'antd';
-
-const App: FC = () => (
-    <div>
-        <Button type="primary">Button</Button>
-    </div>
-)
-
-export default App;
+// export default App;
