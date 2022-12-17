@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Dropdown, Layout, Menu } from "antd";
 import { EditOutlined, TeamOutlined, ReadOutlined, DownOutlined } from "@ant-design/icons";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
+import MyHeader from "components/MyHeader";
 
 
 
@@ -18,45 +19,40 @@ const App = () => {
     );
 
     return (
-        <Layout>
-            <Header className="header">
-                <div className="right">
-                    <Dropdown overlay={menu}>
-                        <a className="ant-dropdow-link" href="!#" onClick={(e) => e.preventDefault()}>
-                            <img src={"../assets/images/defaultAvatar.jpg"} className="avatar" alt="" />
-                            <span >{username}</span>
-                            <DownOutlined />
-                        </a>
-                    </Dropdown>
-                </div>
-            </Header>
-            <Layout>
-                <Sider
-                    theme="dark"
-                    style={{
-                        overflow: "auto",
-                        height: "100vh",
-                        position: "fixed",
-                        left: 0,
-                    }}
-                >
-                    <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
-                        <Menu.Item key="1" icon={<EditOutlined />}>
-                            消息列表
+        <Layout className="container">
+            <MyHeader />
+            <Layout className="container_content">
+                <Sider width={200} >
+                    <Menu
+                        mode="inline"
+                        theme="dark"
+                        defaultOpenKeys={['4']}
+                        style={{ height: '200%', borderRight: 0 }}
+                    >
+                        <Menu.Item key="1">
+                            <Link to={'/list'}><ReadOutlined />信息列表</Link>
                         </Menu.Item>
-                        <Menu.Item key="2" icon={<ReadOutlined />}>
-                            修改资料
+                        <Menu.Item key="2">
+                            <Link to={'/edit'}><TeamOutlined />好友列表</Link>
                         </Menu.Item>
-                        <Menu.Item key="3" icon={<TeamOutlined />}>
-                            好友列表
+                        <Menu.Item key="3">
+                            <Link to={'/means'}><ReadOutlined />修改资料</Link>
                         </Menu.Item>
                     </Menu>
                 </Sider>
-                <Content className="mycontent">
-                    <Outlet />
-                </Content>
-            </Layout>
-            <Footer className="footer">Respect | Copyright © 2022 Author wch</Footer>
+                <Layout style={{ padding: '0 24px 24px' }}>
+                    <Content className="mycontent">
+                        <Outlet />
+                    </Content>
+                </Layout>
+            </Layout >
+            <footer style={{
+                textAlign: 'center',
+                color: '#fff',
+                height: '70px',
+                lineHeight: '70px',
+                background: '#001529'
+            }}>Respect | Copyright &copy; 2022 Author wch</footer>
         </Layout>
     );
 };
