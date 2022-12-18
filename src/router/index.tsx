@@ -2,12 +2,6 @@ import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 import React, { Suspense, lazy } from "react";
 import App from "App";
 import Loading from "components/Loading"
-import Friends from 'pages/Friends'
-import Means from 'pages/Means'
-import Message from 'pages/Message'
-import Login from 'pages/Login'
-import Register from 'pages/Register'
-
 
 //定义数组每一项的接口
 interface IRoute {

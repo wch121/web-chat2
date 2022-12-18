@@ -5,7 +5,10 @@ import { EditOutlined, TeamOutlined, ReadOutlined, DownOutlined } from "@ant-des
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import MyHeader from "components/MyHeader";
 
-
+let arr:number[]=[];
+for(var i=0;i<80;i++){
+    arr.push(i)
+}
 
 const { Header, Footer, Sider, Content } = Layout;
 const { SubMenu } = Menu;
@@ -30,10 +33,10 @@ const App = () => {
                         style={{ height: '200%', borderRight: 0 }}
                     >
                         <Menu.Item key="1">
-                            <Link to={'/list'}><ReadOutlined />信息列表</Link>
+                            <Link to={'/message'}><ReadOutlined />信息列表</Link>
                         </Menu.Item>
                         <Menu.Item key="2">
-                            <Link to={'/edit'}><TeamOutlined />好友列表</Link>
+                            <Link to={'/friends'}><TeamOutlined />好友列表</Link>
                         </Menu.Item>
                         <Menu.Item key="3">
                             <Link to={'/means'}><ReadOutlined />修改资料</Link>
