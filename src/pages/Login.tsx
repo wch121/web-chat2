@@ -32,6 +32,7 @@ export default function Login() {
                 localStorage.setItem('username', res.data.username);
                 localStorage.setItem('chat-token', res.data['chat-token']);
                 localStorage.setItem('avatar', res.data.avatar);
+                localStorage.setItem('userlabel', res.data.userlabel);
                 //跳转根路径
                 setTimeout(() => {
                     navigte("/")
