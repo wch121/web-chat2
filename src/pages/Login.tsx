@@ -2,6 +2,7 @@ import React from 'react'
 import { Button, Form, Input, message } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Link, useNavigate } from 'react-router-dom';
+import { LoginApi } from 'request/api'
 import "./less/Login.less"
 
 const logo = require("assets/images/logo.png")
@@ -16,6 +17,30 @@ export default function Login() {
 
     //点击登录
     const onFinish = (values: IRegisterLogin) => {
+        interface IRes {
+            errCode?: number;
+            message?: string;
+            data?: any;
+        }
+        //获取用户名和密码
+        LoginApi(values).then((res: IRes) => {
+            if (res.errCode === 0) {
+                //提示成功
+                message.success(res.message, 1.5)
+                //保存用户信息和token
+                //loclstorage||react-redux
+                localStorage.setItem('username', res.data.username);
+                localStorage.setItem('chat-token', res.data['chat-token']);
+                localStorage.setItem('avatar', res.data.avatar);
+                //跳转根路径
+                setTimeout(() => {
+                    navigte("/")
+                }, 1500)
+            } else {
+                //提示失败
+                message.warn(res.message, 1.5)
+            }
+        })
     };
 
     const onFinishFailed = (errorInfo: any) => {

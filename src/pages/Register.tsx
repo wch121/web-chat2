@@ -2,6 +2,7 @@ import React from 'react'
 import { Button, Form, Input, message } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Link, useNavigate } from 'react-router-dom';
+import { RegisterApi } from 'request/api'
 import "./less/Login.less"
 
 const logo = require("assets/images/logo.png")
@@ -27,6 +28,21 @@ export default function Register() {
             message?: string;
             data?: any;
         }
+
+        //获取用户名和密码，注册
+        RegisterApi({ username, password }).then((res: IRes) => {
+            if (res.errCode === 0) {
+                //提示成功
+                message.success(res.message, 1.5)
+                //跳转登录页
+                setTimeout(() => {
+                    navigte("/login")
+                }, 1500)
+            }else {
+                //提示失败
+                message.warn(res.message, 1.5)
+            }
+        })
     };
 
     const onFinishFailed = (errorInfo: any) => {
@@ -35,7 +51,7 @@ export default function Register() {
 
     return (
         <div className='login_box'>
-            <img src={logo} className="logo" alt="" width={'100%'}/>
+            <img src={logo} className="logo" alt="" width={'100%'} />
             <Form
                 name="basic"
                 labelCol={{ span: 8 }}
