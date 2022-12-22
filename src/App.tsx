@@ -4,26 +4,22 @@ import { Dropdown, Layout, Menu } from "antd";
 import { EditOutlined, TeamOutlined, ReadOutlined, DownOutlined } from "@ant-design/icons";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import MyHeader from "components/MyHeader";
-
-let arr:number[]=[];
-for(var i=0;i<80;i++){
-    arr.push(i)
-}
+import { connect } from "react-redux";
+import { Dispatch} from "react";
 
 const { Header, Footer, Sider, Content } = Layout;
 const { SubMenu } = Menu;
 
-const App = () => {
-    const [username, setUsername] = useState("匿名用户");
-    const menu = (
-        <Menu>
-            <Menu.Item key="n">退出登录</Menu.Item>
-        </Menu>
-    );
+interface Iprops {
+    key: number;
+    changeKeyFn: () => void;
+}
+
+function App(props:Iprops){
 
     return (
         <Layout className="container">
-            <MyHeader />
+            <MyHeader key={props.key} />
             <Layout className="container_content">
                 <Sider width={200} >
                     <Menu
@@ -60,4 +56,21 @@ const App = () => {
     );
 };
 
-export default App;
+//state的映射
+const mapStateToProps = (state: { key: number }) => {
+    return {
+        key1: state.key
+    }
+}
+
+
+//dispatch的映射
+const mapDispatchToProps = (dispatch: Dispatch<any>) => {
+    return {
+        changeKeyFn() {
+            dispatch({ type: "changeKey" })
+        }
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(App)

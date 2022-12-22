@@ -13,8 +13,8 @@ export default function MyHeader() {
     //componentDidMount
     useEffect(() => {
         if ("avatar" !== null) {
-            // let avatar1 = process.env.SERVER_PORT+ '/' + localStorage.getItem("avatar");
-            let avatar1 = 'http://localhost:9000/' + localStorage.getItem("avatar");
+            let avatar1 = process.env.SERVER_PORT+ '/' + localStorage.getItem("avatar");
+            // let avatar1 = 'http://localhost:9000/' + localStorage.getItem("avatar");
             setAvatar(avatar1)
         } else {
             let avatar1 = defaultAvatar;
