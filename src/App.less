@@ -1,15 +1,17 @@
-.container{
+.container {
     height: 100vh;
-    .container_conter{
+
+    .container_conter {
         height: calc(100vh -170px);
     }
 }
 
-.mycontent{
+.mycontent {
     background-color: #fff;
     overflow: scroll;
-    padding:20px;
+    padding: 20px;
     box-sizing: border-box;
+
     &::-webkit-scrollbar {
         /*滚动条整体样式*/
         width: 10px;
@@ -17,16 +19,36 @@
         background: #fff;
         border-radius: 10px;
     }
+
     &::-webkit-scrollbar-track {
         /*滚动条里面轨道*/
         box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
         border-radius: 10px;
         background: #EDEDED;
     }
+
     &::-webkit-scrollbar-thumb {
         /*滚动条里面小方块*/
         border-radius: 10px;
         box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
         background: #1890ff;
+    }
+
+    div {
+        display: flex;
+        justify-content: center;
+
+        form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            justify-content: space-between;
+            span {
+                display: flex;
+                width: 100%;
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
     }
 }

@@ -1,14 +1,13 @@
 import "App.less";
 import React, { useEffect, useState } from "react";
-import { Dropdown, Layout, Menu } from "antd";
-import { EditOutlined, TeamOutlined, ReadOutlined, DownOutlined } from "@ant-design/icons";
+import {Layout, Menu } from "antd";
+import { EditOutlined, TeamOutlined, ReadOutlined } from "@ant-design/icons";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import MyHeader from "components/MyHeader";
 import { connect } from "react-redux";
 import { Dispatch} from "react";
 
-const { Header, Footer, Sider, Content } = Layout;
-const { SubMenu } = Menu;
+const { Sider, Content } = Layout;
 
 interface Iprops {
     key: number;
@@ -35,7 +34,7 @@ function App(props:Iprops){
                             <Link to={'/friends'}><TeamOutlined />好友列表</Link>
                         </Menu.Item>
                         <Menu.Item key="3">
-                            <Link to={'/means'}><ReadOutlined />修改资料</Link>
+                            <Link to={'/means'}><EditOutlined />修改资料</Link>
                         </Menu.Item>
                     </Menu>
                 </Sider>
@@ -59,7 +58,7 @@ function App(props:Iprops){
 //state的映射
 const mapStateToProps = (state: { key: number }) => {
     return {
-        key1: state.key
+        key: state.key
     }
 }
 
