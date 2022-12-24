@@ -90,7 +90,7 @@ function Means(props: IProps) {
                 size="large"
             >
                 <Form.Item
-                    label="修改用户名："
+                    label="修 改 用 户 名："
                     name="username"
                 >
                     <Input />
