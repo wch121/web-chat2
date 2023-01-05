@@ -14,7 +14,7 @@ const router_arr: IRoute[] = [
     {
         path: "/", component: App, children: [
             { path: "/friends", component: lazy(() => import("pages/Friends")) },
-            { path: "/message", component: lazy(() => import("pages/chat/home")) },
+            { path: "/message", component: lazy(() => import("pages/Message")) },
             { path: "/means", component: lazy(() => import("pages/Means")) },
         ]
     },
